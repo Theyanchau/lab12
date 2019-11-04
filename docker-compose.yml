@@ -1,0 +1,21 @@
+version: '2.0'
+services:
+  flaskapp:
+   build: ./flask
+   image: user/flask
+   networks:
+     - app
+  nginx:
+    image: nginx
+    ports:
+     - 8080:80
+    networks:
+     - app
+    depends_on:
+     - flaskapp
+  redis-ser:
+     image: redis:latest
+     networks:
+      - app
+networks:
+ app: 
